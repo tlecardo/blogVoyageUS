@@ -1,9 +1,9 @@
-title:              Clean Blog
+title:              Blog de voyage
 email:              your-email@example.com
-description:        A Blog Theme by Start Bootstrap
-author:             Start Bootstrap
-baseurl:            "/startbootstrap-clean-blog-jekyll"
-url:                "https://startbootstrap.github.io"
+description:        Voyage de fin d'étude à travers les États-Unis
+author:             YT
+baseurl:            "/blogVoyageUS"
+url:                "https://tlecardo.github.io"
 
 # Social Profiles
 twitter_username:   SBootstrap
