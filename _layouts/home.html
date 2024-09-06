@@ -41,7 +41,7 @@ layout: default
             <h3 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
             {% endif %}
           </a>
-          <p class="post-meta">Posté par
+          <p class="post-meta">Publié par
             {% if post.author %}
             {{ post.author }}
             {% else %}
@@ -58,7 +58,7 @@ layout: default
 
         <!-- Pager -->
         <div class="clearfix">
-          <a class="btn btn-primary float-right" href="{{"/posts" | relative_url }}">View All Posts &rarr;</a>
+          <a class="btn btn-primary float-right" href="{{"/posts" | relative_url }}">Voir toutes les publications &rarr;</a>
         </div>
 
       </div>
