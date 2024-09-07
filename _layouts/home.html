@@ -268,6 +268,7 @@ layout: default
         innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>my_location</i>${cur_loc}</div></h2>`;
         innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>speed</i>${(1.609344 * cur_travel.velocity).toFixed(2)} km/h</div></h2>`;
         innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>skip_next</i>${next_loc}</div></h2>`;
+        document.getElementById("legend_map").innerHTML = innerHTML
       } else {
 
         var cur_code = "MTR"
@@ -291,10 +292,10 @@ layout: default
         innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>my_location</i>${cur_station.city} (${cur_station.state})</div></h2>`;
         innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>speed</i>00.00 km/h</div></h2>`;
         innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>skip_next</i>${next_term.city} (${next_term.state})</div></h2>`;
+        document.getElementById("legend_map").innerHTML = innerHTML
       }
     }
 
-    document.getElementById("legend_map").innerHTML = innerHTML
     renderMap().catch(console.error)
   </script>
 
