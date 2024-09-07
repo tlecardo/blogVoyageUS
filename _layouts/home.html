@@ -201,7 +201,7 @@ layout: default
       var trains = await fetch("https://api-v3.amtraker.com/v3/trains")
         .then(res => res.json())
         .then(res => { return Object.values(res).flat(Infinity) })
-      console.log(train)
+      console.log(trains)
 
       if (cur_section.length > 0) {
 
