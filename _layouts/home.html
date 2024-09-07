@@ -29,11 +29,31 @@ layout: default
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <hr>
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+        <div class="map" id="demo-map"></div>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
         <!-- Send Form -->
         <script>
           console.log("Test")
+
+          async function renderMap() {
+
+            const frame = new L.LatLngBounds(new L.LatLng(32, -122.292293), new L.LatLng(45.500295, -73.567149))
+
+            const map = L.map(document.querySelector(".map"), { attributionControl: false });
+
+            L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
+              .addTo(map);
+
+            L.control.scale({ position: 'topright' })
+              .addTo(map);
+
+            map.fitBounds(frame);
+          }
+          
+          renderMap().catch(console.error)
         </script>
         <hr>
       </div>

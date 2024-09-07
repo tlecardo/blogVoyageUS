@@ -74,3 +74,132 @@ img::-moz-selection {
     color: $white;
     background: transparent;
 }
+
+
+body {
+    margin: 0;
+  }
+  
+  .map {
+    width: 100svw;
+    height: 100svh;
+  }
+  
+  .track,
+  .city {
+    text-align: center;
+  }
+  
+  .title {
+    font-size: medium;
+    font-weight: bolder;
+  }
+  
+  .marker-pin {
+    width: 30px;
+    height: 30px;
+    border-radius: 50% 50% 50% 0;
+    background: #3d4be1;
+    position: absolute;
+    transform: rotate(-45deg);
+    left: 50%;
+    top: 50%;
+    margin: -15px 0 0 -15px;
+  }
+  
+  .marker-pin::after {
+    content: '';
+    width: 24px;
+    height: 24px;
+    margin: 3px 0 0 3px;
+    background: #fff;
+    position: absolute;
+    border-radius: 50%;
+  }
+  
+  .custom-div-icon i {
+    position: absolute;
+    width: 22px;
+    font-size: 22px;
+    left: 0;
+    right: 0;
+    margin: 10px auto;
+    text-align: center;
+  }
+  
+  .custom-div-icon i.awesome {
+    margin: 12px auto;
+    font-size: 17px;
+  }
+  
+  
+  /* color infos */
+  
+  .legend {
+    margin: 6px;
+    font: 14px Arial, Helvetica, sans-serif;
+    background: rgb(237, 214, 214);
+    background: rgba(255, 255, 255, 0.9);
+    line-height: 24px;
+    color: #555;
+  }
+  
+  .legend h4 {
+    font-weight: 700;
+    text-align: center;
+    font-size: 18px;
+    margin: 10px 12px 4px;
+    color: #535353;
+  }
+  
+  .legend h2 {
+    font-weight: 400;
+    text-align: center;
+    font-size: 18px;
+    margin: 2px 12px 2px;
+    color: #777;
+  }
+  
+  .legend h2 .text {
+    font-size: 16px;
+    color: #949494;
+  }
+  
+  .legend h2 .material-icons-outlined {
+    font-size: 30px;
+    margin-right: 10px;
+  }
+  
+  .wrapper {
+    display: flex;
+    align-items: center;
+  }
+  
+  img.photos {
+    width: 20vw;
+  }
+  
+  @media screen and (max-aspect-ratio: 1) and (max-width: 1000px) {
+    .legend {
+      font: 1.5vw;
+      width: 98vw;
+      margin: 1vw;
+    }
+  
+    .legend h4 {
+      font-size: 3vw;
+    }
+  
+    .legend h2 .text {
+      font-size: 2.5vw;
+    }
+  
+    .legend h2 {
+      font-size: 3vw;
+      margin: 1.5% 12px 1.5%;
+    }
+  
+    img.photos {
+      width: 500px;
+    }
+  }
