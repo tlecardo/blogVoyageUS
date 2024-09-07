@@ -269,10 +269,21 @@ layout: default
         let cur_pos = [cur_station.lat, cur_station.lon]
         L.marker(cur_pos, { icon: yellowIcon })
           .addTo(map)
+
+        legend.onAdd = function (map) {
+          var div = L.DomUtil.create("div", "legend");
+          div.innerHTML += `<h4>Informations</h4>`;
+          div.innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>my_location</i>${cur_station.city} (${cur_station.state})</div></h2>`;
+          div.innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>speed</i>00.00 km/h</div></h2>`;
+          div.innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>skip_next</i>${next_term.city} (${next_term.state})</div></h2>`;
+          return div;
+        };
+
+        legend.addTo(map);
       }
     }
 
-      renderMap().catch(console.error)
+    renderMap().catch(console.error)
   </script>
 
   <div class="container">
