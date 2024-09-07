@@ -28,6 +28,7 @@ layout: default
     <div class="col-lg-8 col-md-10 mx-auto">
       <hr>
       <div class="map"></div>
+      <div class="legend_map"></div>
       <hr>
     </div>
   </div>
@@ -266,6 +267,14 @@ layout: default
         var diff_update = new Date(today - update_date)
         var seconds = `${diff_update.getSeconds()}`.padStart(2, "0")
         var minutes = `${diff_update.getMinutes()}`
+
+
+        var innerHTML = `<h4>Informations (act. ${minutes}' ${seconds}'')</h4>`;
+        innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>my_location</i>${cur_loc}</div></h2>`;
+        innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>speed</i>${(1.609344 * cur_travel.velocity).toFixed(2)} km/h</div></h2>`;
+        innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>skip_next</i>${next_loc}</div></h2>`;
+
+        document.getElementById("legend").innerHTML = innerHTML
 
         legend.onAdd = function (map) {
           var div = L.DomUtil.create("div", "legend");
