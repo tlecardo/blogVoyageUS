@@ -37,7 +37,17 @@ layout: default
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
   <script>
-    console.log("Test")
+    var iconMarker = (name, color) => L.divIcon({
+      className: 'custom-div-icon',
+      html: `<div style='background-color:${color};' class='marker-pin'></div><i class='material-icons-outlined'>${name}</i>`,
+      iconSize: [30, 42],
+      iconAnchor: [15, 42]
+    });
+
+    var here = iconMarker("train", "#b40000")
+    var iconTrain = iconMarker("train", "#3d4be1")
+    var iconCity = iconMarker("location_city", "#3d4be1")
+    var iconShelter = iconMarker("night_shelter", "#3d4be1")
 
     async function renderMap() {
 
@@ -49,6 +59,116 @@ layout: default
       L.control.scale({ position: 'topright' })
         .addTo(map);
       map.fitBounds(frame);
+
+      var shelterMarkers = new L.FeatureGroup();
+      var cityMarkers = new L.FeatureGroup();
+      var stationMarkers = new L.FeatureGroup();
+
+      let htmlPage = x => `<div class="city title">${x}</div>`
+
+      cityMarkers.addLayer(L.marker([42.6511674, -73.754968], { icon: iconCity })
+        .bindTooltip(htmlPage("Albany")))
+      cityMarkers.addLayer(L.marker([41.878773, -87.638622], { icon: iconCity })
+        .bindTooltip(htmlPage("Chicago")))
+      cityMarkers.addLayer(L.marker([47.597811, -122.329564], { icon: iconCity })
+        .bindTooltip(htmlPage("Seattle")))
+      cityMarkers.addLayer(L.marker([37.7792588, -122.4193286], { icon: iconCity })
+        .bindTooltip(htmlPage("San Francisco")))
+      cityMarkers.addLayer(L.marker([34.0536909, -118.242766], { icon: iconCity })
+        .bindTooltip(htmlPage("Los Angeles")))
+      cityMarkers.addLayer(L.marker([29.946275, -90.078913], { icon: iconCity })
+        .bindTooltip(htmlPage("La Nouvelle-Orléans")))
+      cityMarkers.addLayer(L.marker([40.750262, -73.992824], { icon: iconCity })
+        .bindTooltip(htmlPage("New York")))
+      cityMarkers.addLayer(L.marker([45.500295, -73.567149], { icon: iconCity })
+        .bindTooltip(htmlPage("Montréal")))
+      cityMarkers.addLayer(L.marker([38.898487, -77.005291], { icon: iconCity })
+        .bindTooltip(htmlPage("Washington")))
+      cityMarkers.addLayer(L.marker([31.7575839, -106.49583], { icon: iconCity })
+        .bindTooltip(htmlPage("El Paso")))
+
+      stationMarkers.addLayer(L.marker([42.641298, -73.741554], { icon: iconTrain })
+        .bindTooltip(`<div class="city title">Albany-Rensselaer Station</div>`))
+      stationMarkers.addLayer(L.marker([41.878773, -87.638622], { icon: iconTrain })
+        .bindTooltip(`<div class="city title">Chicago Union Station</div>`))
+      stationMarkers.addLayer(L.marker([47.597811, -122.329564], { icon: iconTrain })
+        .bindTooltip(`<div class="city title">Seattle King Street</div>`))
+      stationMarkers.addLayer(L.marker([37.79370106439311, -122.27162491397662], { icon: iconTrain })
+        .bindTooltip(`<div class="city title">Oakland Jack London Station</div>`))
+      stationMarkers.addLayer(L.marker([34.055863, -118.234245], { icon: iconTrain })
+        .bindTooltip(`<div class="city title">Union Station</div>`))
+      stationMarkers.addLayer(L.marker([29.946275, -90.078913], { icon: iconTrain })
+        .bindTooltip(`<div class="city title">New-Orleans Station</div>`))
+      stationMarkers.addLayer(L.marker([40.750262, -73.992824], { icon: iconTrain })
+        .bindTooltip(`<div class="city title">New-York Penn Station</div>`))
+      stationMarkers.addLayer(L.marker([45.500295, -73.567149], { icon: iconTrain })
+        .bindTooltip(`<div class="city title">Gare Centrale</div>`))
+      stationMarkers.addLayer(L.marker([38.898487, -77.005291], { icon: iconTrain })
+        .bindTooltip(`<div class="city title">Washington Union Station</div>`))
+      stationMarkers.addLayer(L.marker([31.7575839, -106.49583], { icon: iconTrain })
+        .bindTooltip(`<div class="city title">Union Depot</div>`))
+
+      map.fitBounds(frame);
+
+      var center_default = map.getCenter()
+      var zoom_default = map.getZoom()
+
+      var AlbLog = L.marker([42.6729622, -73.783004], { icon: iconShelter })
+        .bindTooltip(`<div class="city title">AirBnB</div>`)
+      var ChiLog = L.marker([41.87562082670103, -87.6264550090755], { icon: iconShelter })
+        .bindTooltip(`<div class="city title">HI Chicago Hostel</div>`)
+      var SeaLog = L.marker([47.7364269, -122.3460506], { icon: iconShelter })
+        .bindTooltip(`<div class="city title">Americas Inn and Suite</div>`)
+      var SFLog = L.marker([37.7879, -122.411994], { icon: iconShelter })
+        .bindTooltip(`<div class="city title">Fitzgerald Hotel Union Square</div>`)
+      var LALog = L.marker([34.0442543, -118.3035257], { icon: iconShelter })
+        .bindTooltip(`<div class="city title">AirBnB</div>`)
+      var EPLog = L.marker([31.8158525, -106.5175854], { icon: iconShelter })
+        .bindTooltip(`<div class="city title">AirBnB</div>`)
+      var NOLog = L.marker([29.9680541, -90.0923779], { icon: iconShelter })
+        .bindTooltip(`<div class="city title">India House Hostel</div>`)
+      var WALog = L.marker([38.9217766, -77.042119], { icon: iconShelter })
+        .bindTooltip(`<div class="city title">Washington International Student Center</div>`)
+
+      shelterMarkers.addLayer(AlbLog);
+      shelterMarkers.addLayer(ChiLog);
+      shelterMarkers.addLayer(SeaLog);
+      shelterMarkers.addLayer(SFLog);
+      shelterMarkers.addLayer(LALog);
+      shelterMarkers.addLayer(EPLog);
+      shelterMarkers.addLayer(NOLog);
+      shelterMarkers.addLayer(WALog);
+
+      map.addLayer(cityMarkers);
+
+      map.on('zoomend', function () {
+        if (map.getZoom() < 12) {
+          map.removeLayer(shelterMarkers);
+          map.removeLayer(stationMarkers);
+          map.addLayer(cityMarkers);
+        } else {
+          map.addLayer(shelterMarkers);
+          map.addLayer(stationMarkers);
+          map.removeLayer(cityMarkers);
+        }
+      });
+
+      await fetch(`https://raw.githubusercontent.com/tlecardo/USProject/main/USTracks/Amtrak_tracks.geojson`)
+        .then(res => res.json())
+        .then(res => {
+          new L.geoJSON(res, {
+            onEachFeature: function (feature, layer) {
+              layer.bindTooltip(
+                `<center class="track title">${feature.properties.name}</center>` +
+                `<center>${(feature.properties.distance / 1000).toFixed(2)} km</center>` +
+                `<center>${convertString(feature.properties.time / 1000)}</center>`,
+                { sticky: true, });
+            },
+            async: true,
+            marker_options: { startIconUrl: '', endIconUrl: '', shadowUrl: '' },
+            style: { color: "blue", opacity: 0.5, dashArray: "5 10" },
+          }).addTo(map);
+        })
     }
 
     renderMap().catch(console.error)
