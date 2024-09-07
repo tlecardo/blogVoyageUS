@@ -71,21 +71,17 @@ layout: default
     var iconCity = iconMarker("location_city", "#3d4be1")
     var iconShelter = iconMarker("night_shelter", "#3d4be1")
 
+    var innerHTML = `<h4>Informations</h4>`;
+    innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>my_location</i>---- (---)</div></h2>`;
+    innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>speed</i>--.-- km/h</div></h2>`;
+    innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>skip_next</i>---- (---)</div></h2>`;
+
+    document.getElementById("legend_map").innerHTML = innerHTML
+
     async function renderMap() {
 
       const frame = new L.LatLngBounds(new L.LatLng(32, -122.292293), new L.LatLng(45.500295, -73.567149))
       const map = L.map(document.querySelector(".map"), { attributionControl: false });
-
-      var legend = L.control({ position: "bottomright" });
-      legend.onAdd = function (map) {
-        var div = L.DomUtil.create("div", "legend");
-        div.innerHTML += `<h4>Informations</h4>`;
-        div.innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>my_location</i>---- (---)</div></h2>`;
-        div.innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>speed</i>--.-- km/h</div></h2>`;
-        div.innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>skip_next</i>---- (---)</div></h2>`;
-        return div;
-      };
-      legend.addTo(map);
 
       L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
         .addTo(map);
@@ -268,23 +264,10 @@ layout: default
         var seconds = `${diff_update.getSeconds()}`.padStart(2, "0")
         var minutes = `${diff_update.getMinutes()}`
 
-
-        var innerHTML = `<h4>Informations (act. ${minutes}' ${seconds}'')</h4>`;
+        innerHTML = `<h4>Informations (act. ${minutes}' ${seconds}'')</h4>`;
         innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>my_location</i>${cur_loc}</div></h2>`;
         innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>speed</i>${(1.609344 * cur_travel.velocity).toFixed(2)} km/h</div></h2>`;
         innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>skip_next</i>${next_loc}</div></h2>`;
-
-        document.getElementById("legend_map").innerHTML = innerHTML
-
-        legend.onAdd = function (map) {
-          var div = L.DomUtil.create("div", "legend");
-          div.innerHTML += `<h4>Informations (act. ${minutes}' ${seconds}'')</h4>`;
-          div.innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>my_location</i>${cur_loc}</div></h2>`;
-          div.innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>speed</i>${(1.609344 * cur_travel.velocity).toFixed(2)} km/h</div></h2>`;
-          div.innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>skip_next</i>${next_loc}</div></h2>`;
-          return div;
-        };
-        legend.addTo(map);
       } else {
 
         var cur_code = "MTR"
@@ -304,19 +287,14 @@ layout: default
         L.marker(cur_pos, { icon: yellowIcon })
           .addTo(map)
 
-        legend.onAdd = function (map) {
-          var div = L.DomUtil.create("div", "legend");
-          div.innerHTML += `<h4>Informations</h4>`;
-          div.innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>my_location</i>${cur_station.city} (${cur_station.state})</div></h2>`;
-          div.innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>speed</i>00.00 km/h</div></h2>`;
-          div.innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>skip_next</i>${next_term.city} (${next_term.state})</div></h2>`;
-          return div;
-        };
-
-        legend.addTo(map);
+        innerHTML = `<h4>Informations</h4>`;
+        innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>my_location</i>${cur_station.city} (${cur_station.state})</div></h2>`;
+        innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>speed</i>00.00 km/h</div></h2>`;
+        innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>skip_next</i>${next_term.city} (${next_term.state})</div></h2>`;
       }
     }
 
+    document.getElementById("legend_map").innerHTML = innerHTML
     renderMap().catch(console.error)
   </script>
 
