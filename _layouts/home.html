@@ -176,9 +176,102 @@ layout: default
             style: { color: "blue", opacity: 0.5, dashArray: "5 10" },
           }).addTo(map);
         })
-    }
 
-    renderMap().catch(console.error)
+      var sections = [
+        {
+          route: "Sunset Limited",
+          origin: {
+            code: "LAX",
+            date: "2024-09-06T22:00:00-07:00"
+          },
+          dest: {
+            code: "NOL",
+            date: "2024-09-08T21:40:00-05:00"
+          },
+        }
+      ]
+
+      var today = new Date();
+      var cur_section = sections.filter(section => today >= new Date(section.origin.date) && today <= new Date(section.dest.date))
+
+      var stations = await fetch("https://api-v3.amtraker.com/v3/stations")
+        .then(res => res.json())
+        .then(res => { return res })
+
+      var trains = await fetch("https://api-v3.amtraker.com/v3/trains")
+        .then(res => res.json())
+        .then(res => { return Object.values(res).flat(Infinity) })
+      console.log(train)
+
+      if (cur_section.length > 0) {
+
+        cur_section = cur_section[0]
+
+        cur_travel = trains
+          .filter(value => value.routeName === cur_section.route && value.trainState === "Active")
+          .filter(value => {
+            var nb_match = value.stations.reduce(
+              (prev, cur) => prev + (cur.code === cur_section.dest.code && cur.schDep.includes(cur_section.dest.date))
+                || (cur.code === cur_section.origin.code && cur.schDep.includes(cur_section.origin.date)), 0)
+            return nb_match === 2
+          })[0]
+
+        let cur_pos = [cur_travel.lat, cur_travel.lon]
+        var marker = L.marker(cur_pos, { icon: here })
+          .addTo(map)
+
+        marker.on('click', function (e) {
+          var zoom = map.getZoom()
+          map.flyTo(
+            zoom === 10 ? center_default : e.latlng,
+            zoom === 10 ? zoom_default : 10,
+            {
+              animate: true,
+              duration: 1
+            });
+        });
+
+        var cur_loc = await getCity(cur_pos)
+
+        var next_travel = stations[cur_section.dest.code]
+        let next_pos = [next_travel.lat, next_travel.lon]
+        var next_loc = await getCity(next_pos)
+
+        var update_date = new Date(cur_travel.updatedAt)
+        var diff_update = new Date(today - update_date)
+        var seconds = `${diff_update.getSeconds()}`.padStart(2, "0")
+        var minutes = `${diff_update.getMinutes()}`
+
+        legend.onAdd = function (map) {
+          var div = L.DomUtil.create("div", "legend");
+          div.innerHTML += `<h4>Informations (act. ${minutes}' ${seconds}'')</h4>`;
+          div.innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>my_location</i>${cur_loc}</div></h2>`;
+          div.innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>speed</i>${(1.609344 * cur_travel.velocity).toFixed(2)} km/h</div></h2>`;
+          div.innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>skip_next</i>${next_loc}</div></h2>`;
+          return div;
+        };
+        legend.addTo(map);
+      } else {
+
+        var cur_code = "MTR"
+        var next_code = "ALB"
+        for (let idx = 0; idx < sections.length; idx++) {
+          if (new Date(sections[idx].dest.date) <= today && new Date(sections[idx + 1].dest.date) >= today) {
+            cur_code = sections[idx].dest.code
+            next_code = sections[idx + 1].dest.code
+            break
+          }
+        }
+
+        var cur_station = stations[cur_code]
+        var next_term = stations[next_code]
+
+        let cur_pos = [cur_station.lat, cur_station.lon]
+        L.marker(cur_pos, { icon: yellowIcon })
+          .addTo(map)
+      }
+
+      renderMap().catch(console.error)
   </script>
 
   <div class="container">
