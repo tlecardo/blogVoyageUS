@@ -4,7 +4,8 @@ layout: default
 
 <!-- Page Header -->
 {% if page.background %}
-<header class="masthead" style="background-image: url('{{ page.background | prepend: site.baseurl | replace: '//', '/' }}')">
+<header class="masthead"
+  style="background-image: url('{{ page.background | prepend: site.baseurl | replace: '//', '/' }}')">
   {% else %}
   <header class="masthead">
     {% endif %}
@@ -28,6 +29,18 @@ layout: default
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <hr>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="{{" /assets/vendor/startbootstrap-clean-blog/js/scripts.js" | relative_url }}"></script>
+
+        <script src="{{" /assets/scripts.js" | relative_url }}"></script>
+
+        {% if page.name contains 'home' %}
+        <!-- Send Form -->
+        <script>
+          console.log("Test")
+        </script>
+        {% endif %}
         <hr>
       </div>
     </div>
@@ -55,7 +68,7 @@ layout: default
             {{ site.author }}
             {% endif %}
             le
-            {{ post.date | date: '%d %B %Y' }}            
+            {{ post.date | date: '%d %B %Y' }}
           </p>
         </article>
 
@@ -65,7 +78,8 @@ layout: default
 
         <!-- Pager -->
         <div class="clearfix">
-          <a class="btn btn-primary float-right" href="{{"/posts" | relative_url }}">Voir toutes les publications &rarr;</a>
+          <a class="btn btn-primary float-right" href="{{" /posts" | relative_url }}">Voir toutes les publications
+            &rarr;</a>
         </div>
 
       </div>
