@@ -44,6 +44,20 @@ layout: default
       return `${diff_hours}h${diff_minutes}m`
     }
 
+    let getCity = async function (pos) {
+      return await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${pos[0]}&lon=${pos[1]}`)
+        .then(res => res.json())
+        .then(res => {
+          var key_city = Object.keys(res.address).includes("city") ? "city" : (
+            Object.keys(res.address).includes("town") ? "town" : (
+              Object.keys(res.address).includes("village") ? "village" : null))
+
+          var town = key_city ? new String(res.address[key_city]) : "----"
+          var state = new String(res.address["ISO3166-2-lvl4"].split("-")[1])
+          return `${town.slice(0, 20)} (${state})`
+        })
+    }
+
     var iconMarker = (name, color) => L.divIcon({
       className: 'custom-div-icon',
       html: `<div style='background-color:${color};' class='marker-pin'></div><i class='material-icons-outlined'>${name}</i>`,
