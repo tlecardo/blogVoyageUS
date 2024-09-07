@@ -28,7 +28,16 @@ layout: default
     <div class="col-lg-8 col-md-10 mx-auto">
       <hr>
       <div class="map"></div>
-      <div id="legend_map" class="legend"></div>
+      <div id="legend_map" class="legend">
+        <h4 id="info_val">Informations</h4>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm"><h2><div class="wrapper"><i class='material-icons-outlined'>my_location</i><i id="location_val">---- (---)</i></div></h2></div>
+            <div class="col-sm"><h2><div class="wrapper"><i class='material-icons-outlined'>speed</i><i id="speed_val">--.-- km/h</i></div></h2></div>
+            <div class="col-sm"><h2><div class="wrapper"><i class='material-icons-outlined'>skip_next</i><i id="next_val">---- (---)</i></div></h2></div>
+          </div>
+        </div>
+      </div>
       <hr>
     </div>
   </div>
@@ -71,13 +80,14 @@ layout: default
     var iconCity = iconMarker("location_city", "#3d4be1")
     var iconShelter = iconMarker("night_shelter", "#3d4be1")
 
+/*
     var innerHTML = `<h4>Informations</h4>`;
     innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>my_location</i>---- (---)</div></h2>`;
     innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>speed</i>--.-- km/h</div></h2>`;
     innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>skip_next</i>---- (---)</div></h2>`;
 
     document.getElementById("legend_map").innerHTML = innerHTML
-
+*/
     async function renderMap() {
 
       const frame = new L.LatLngBounds(new L.LatLng(32, -122.292293), new L.LatLng(45.500295, -73.567149))
@@ -264,11 +274,19 @@ layout: default
         var seconds = `${diff_update.getSeconds()}`.padStart(2, "0")
         var minutes = `${diff_update.getMinutes()}`
 
+        /*
         innerHTML = `<h4>Informations (act. ${minutes}' ${seconds}'')</h4>`;
         innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>my_location</i>${cur_loc}</div></h2>`;
         innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>speed</i>${(1.609344 * cur_travel.velocity).toFixed(2)} km/h</div></h2>`;
         innerHTML += `<h2><div class="wrapper"><i class='material-icons-outlined'>skip_next</i>${next_loc}</div></h2>`;
         document.getElementById("legend_map").innerHTML = innerHTML
+        */
+
+
+        document.getElementById("info_val").innerHTML = `<h4>Informations (act. ${minutes}' ${seconds}'')`
+        document.getElementById("location_val").innerHTML = cur_loc
+        document.getElementById("speed_val").innerHTML = `${(1.609344 * cur_travel.velocity).toFixed(2)}`
+        document.getElementById("next_val").innerHTML = next_loc
       } else {
 
         var cur_code = "MTR"
