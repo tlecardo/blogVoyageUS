@@ -130,16 +130,7 @@ img::-moz-selection {
   
   
   /* color infos */
-  
-  .legend {
-    margin: 6px;
-    font: 14px Arial, Helvetica, sans-serif;
-    background: rgb(237, 214, 214);
-    background: rgba(255, 255, 255, 0.9);
-    line-height: 24px;
-    color: #555;
-  }
-  
+
   .legend h4 {
     font-weight: 700;
     text-align: center;
@@ -171,10 +162,6 @@ img::-moz-selection {
     align-items: center;
   }
   
-  img.photos {
-    width: 20vw;
-  }
-  
   @media screen and (max-aspect-ratio: 1) and (max-width: 1000px) {
     .legend {
       font: 1.5vw;
@@ -193,9 +180,5 @@ img::-moz-selection {
     .legend h2 {
       font-size: 3vw;
       margin: 1.5% 12px 1.5%;
-    }
-  
-    img.photos {
-      width: 500px;
     }
   }
