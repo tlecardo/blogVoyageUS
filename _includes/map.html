@@ -91,6 +91,8 @@
             fullscreenControlOptions: { position: 'topleft' }
         });
 
+        map.on('fullscreenchange', function () { map.fitBounds(frame)});
+
         L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
             .addTo(map);
         L.control.scale({ position: 'topright' })
