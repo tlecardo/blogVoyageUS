@@ -45,6 +45,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/3.0.2/Control.FullScreen.min.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
 <script>
@@ -84,7 +85,11 @@
     async function renderMap() {
 
         const frame = new L.LatLngBounds(new L.LatLng(32, -122.292293), new L.LatLng(45.500295, -73.567149))
-        const map = L.map(document.querySelector(".map"), { attributionControl: false });
+        const map = L.map(document.querySelector(".map"), {
+            attributionControl: false,
+            fullscreenControl: true,
+            fullscreenControlOptions: { position: 'topleft' }
+        });
 
         L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
             .addTo(map);
