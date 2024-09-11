@@ -88,8 +88,9 @@
         const map = L.map(document.querySelector(".map"), {
             attributionControl: false,
             fullscreenControl: true,
-            fullscreenControlOptions: { position: 'topleft' }
-        });
+            fullscreenControlOptions: {
+                position: 'topleft'
+        } });
 
         map.on('fullscreenchange', function () { map.fitBounds(frame)});
 

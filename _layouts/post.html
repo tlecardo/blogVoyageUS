@@ -4,8 +4,7 @@ layout: default
 
 <!-- Page Header -->
 {% if page.background %}
-<header class="masthead"
-  style="background-image: url('{{ page.background | prepend: site.baseurl | replace: '//', '/' }}')">
+<header class="masthead" style="background-image: url('{{ page.background | prepend: site.baseurl | replace: '//', '/' }}')">
   {% else %}
   <header class="masthead">
     {% endif %}
@@ -13,17 +12,6 @@ layout: default
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <script>
-            const imgs = document.querySelectorAll('img.img-fluid');
-            const fullPage = document.querySelector('#fullpage');
-
-            imgs.forEach(img => {
-              img.addEventListener('click', function () {
-                fullPage.style.backgroundImage = 'url(' + img.src + ')';
-                fullPage.style.display = 'block';
-              });
-            });
-          </script>
           <div class="post-heading">
             <h1>{{ page.title }}</h1>
             {% if page.subtitle %}
@@ -37,7 +25,6 @@ layout: default
         </div>
       </div>
     </div>
-    <div id="fullpage" onclick="this.style.display='none';"></div>
   </header>
 
   <div class="container">
@@ -51,15 +38,11 @@ layout: default
         <div class="clearfix">
 
           {% if page.previous.url %}
-          <a class="btn btn-primary float-left"
-            href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip"
-            data-placement="top" title="{{ page.previous.title }}">&larr; Post<span class="d-none d-md-inline">
-              Précédant</span></a>
+          <a class="btn btn-primary float-left" href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{ page.previous.title }}">&larr; Post<span class="d-none d-md-inline">
+            Précédant</span></a>
           {% endif %}
           {% if page.next.url %}
-          <a class="btn btn-primary float-right" href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}"
-            data-toggle="tooltip" data-placement="top" title="{{ page.next.title }}">Post<span
-              class="d-none d-md-inline">
+          <a class="btn btn-primary float-right" href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{ page.next.title }}">Post<span class="d-none d-md-inline">
               Suivant</span> &rarr;</a>
           {% endif %}
 
