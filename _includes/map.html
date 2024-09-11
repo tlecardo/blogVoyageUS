@@ -92,7 +92,10 @@
                 position: 'topleft'
         } });
 
-        map.on('fullscreenchange', function () { map.fitBounds(frame)});
+        map.on('fullscreenchange', function () { 
+            bounds = map.getBounds();
+            map.fitBounds(bounds)
+        });
 
         L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
             .addTo(map);
