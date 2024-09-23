@@ -46,8 +46,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
-<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"  rel="stylesheet">
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'
+    rel='stylesheet' />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 <script>
 
     let convertString = function (milisecs) {
@@ -90,17 +91,16 @@
             fullscreenControl: true,
             fullscreenControlOptions: {
                 position: 'topleft'
-        } });
+            }
+        });
 
-        map.on('fullscreenchange', function () { 
+        map.on('fullscreenchange', function () {
             bounds = map.getBounds();
             map.fitBounds(bounds)
         });
 
-        L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png")
-            .addTo(map);
-        L.control.scale({ position: 'topright' })
-            .addTo(map);
+        L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+        L.control.scale({ position: 'topright' }).addTo(map);
         map.fitBounds(frame);
 
         var shelterMarkers = new L.FeatureGroup();
@@ -215,14 +215,114 @@
 
         var sections = [
             {
+                route: "Adirondack",
+                origin: {
+                    code: "MTR",
+                    date: "2024-09-30T11:10:00-04:00"
+                },
+                dest: {
+                    code: "ALB",
+                    date: "2024-09-30T19:00:00-04:00"
+                },
+            },
+            {
+                route: "Lake Shore Limited",
+                origin: {
+                    code: "ALB",
+                    date: "2024-10-01T19:05:00-04:00"
+                },
+                dest: {
+                    code: "CHI",
+                    date: "2024-10-02T10:12:00-05:00"
+                },
+            },
+            {
+                route: "Empire Builder",
+                origin: {
+                    code: "CHI",
+                    date: "2024-10-03T15:05:00-05:00"
+                },
+                dest: {
+                    code: "SEA",
+                    date: "2024-10-05T11:29:00-07:00"
+                },
+            },
+            {
+                route: "Coast Starlight",
+                origin: {
+                    code: "SEA",
+                    date: "2024-10-08T09:55:00-07:00"
+                },
+                dest: {
+                    code: "OKJ",
+                    date: "2024-10-09T09:09:00-07:00"
+                },
+            },
+            {
+                route: "Coast Starlight",
+                origin: {
+                    code: "OKJ",
+                    date: "2024-10-13T09:09:00-07:00"
+                },
+                dest: {
+                    code: "LAX",
+                    date: "2024-10-13T21:11:00-07:00"
+                },
+            },
+            {
                 route: "Sunset Limited",
                 origin: {
                     code: "LAX",
-                    date: "2024-09-08T22:00:00-07:00"
+                    date: "2024-10-18T22:00:00-07:00"
+                },
+                dest: {
+                    code: "ELP",
+                    date: "2024-10-19T15:45:00-06:00"
+                },
+            },
+            {
+                route: "Sunset Limited",
+                origin: {
+                    code: "ELP",
+                    date: "2024-10-21T15:45:00-06:00"
+
                 },
                 dest: {
                     code: "NOL",
-                    date: "2024-09-10T21:40:00-05:00"
+                    date: "2024-10-22T21:40:00-05:00"
+                },
+            },
+            {
+                route: "Crescent",
+                origin: {
+                    code: "NOL",
+                    date: "2024-10-25T09:15:00-05:00"
+                },
+                dest: {
+                    code: "WAS",
+                    date: "2024-10-26T14:15:00-04:00"
+                },
+            },
+            {
+                route: "Northeast Regional",
+                origin: {
+                    code: "WAS",
+                    date: "2024-10-27T22:00:00-04:00"
+                },
+                dest: {
+                    code: "NYP",
+                    date: "2024-10-28T05:29:00-04:00"
+                },
+            },
+            {
+                route: "Adirondack",
+                origin: {
+                    code: "NYP",
+                    date: "2024-10-28T08:35:00-04:00"
+                },
+                dest: {
+                    code: "MTR",
+                    date: "2024-10-28T20:16:00-04:00"
                 },
             }
         ]
@@ -253,8 +353,7 @@
                 })[0]
 
             let cur_pos = [cur_travel.lat, cur_travel.lon]
-            var marker = L.marker(cur_pos, { icon: here })
-                .addTo(map)
+            var marker = L.marker(cur_pos, { icon: here }).addTo(map)
 
             marker.on('click', function (e) {
                 var zoom = map.getZoom()
@@ -298,12 +397,11 @@
             var next_term = stations[next_code]
 
             let cur_pos = [cur_station.lat, cur_station.lon]
-            L.marker(cur_pos, { icon: yellowIcon })
-                .addTo(map)
+            L.marker(cur_pos, { icon: here }).addTo(map)
 
             document.getElementById("info_val").innerHTML = `<h4>Informations`
             document.getElementById("location_val").innerHTML = `${cur_station.city} (${cur_station.state})`
-            document.getElementById("speed_val").innerHTML = `00.00`
+            document.getElementById("speed_val").innerHTML = `--.--`
             document.getElementById("next_val").innerHTML = `${next_term.city} (${next_term.state})`
         }
     }
