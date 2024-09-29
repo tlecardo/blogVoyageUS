@@ -82,6 +82,7 @@
     var iconTrain = iconMarker("train", "#3d4be1")
     var iconCity = iconMarker("location_city", "#3d4be1")
     var iconShelter = iconMarker("night_shelter", "#3d4be1")
+    var iconStop = iconMarker("airline_stops", "rgba(0, 0, 255, 0.3)")
 
     async function renderMap() {
 
@@ -106,8 +107,32 @@
         var shelterMarkers = new L.FeatureGroup();
         var cityMarkers = new L.FeatureGroup();
         var stationMarkers = new L.FeatureGroup();
+        var stopMarkers = new L.FeatureGroup();
 
         let htmlPage = x => `<div class="city title">${x}</div>`
+
+        stopMarkers.addLayer(L.marker([45.5291618, -122.6764392], { icon: iconStop })
+            .bindTooltip(htmlPage("Portland")))
+        stopMarkers.addLayer(L.marker([38.586122, -121.499993], { icon: iconStop })
+            .bindTooltip(htmlPage("Sacramento")))
+        stopMarkers.addLayer(L.marker([33.7994107, -84.3922392], { icon: iconStop })
+            .bindTooltip(htmlPage("Atlanta")))
+        stopMarkers.addLayer(L.marker([35.241292, -80.822753], { icon: iconStop })
+            .bindTooltip(htmlPage("Charlotte")))
+        stopMarkers.addLayer(L.marker([44.947352, -93.083229], { icon: iconStop })
+            .bindTooltip(htmlPage("St-Paul")))
+        stopMarkers.addLayer(L.marker([48.5546453, -109.6785325], { icon: iconStop })
+            .bindTooltip(htmlPage("Havre")))
+        stopMarkers.addLayer(L.marker([47.6561043, -117.4156367], { icon: iconStop })
+            .bindTooltip(htmlPage("Spokane")))
+        stopMarkers.addLayer(L.marker([41.6380568, -83.5409577], { icon: iconStop })
+            .bindTooltip(htmlPage("Toledo")))
+        stopMarkers.addLayer(L.marker([33.0558404, -112.0469153], { icon: iconStop })
+            .bindTooltip(htmlPage("Maricopa")))
+        stopMarkers.addLayer(L.marker([29.4203222, -98.4779447], { icon: iconStop })
+            .bindTooltip(htmlPage("San Antonio")))
+        stopMarkers.addLayer(L.marker([29.767452, -95.3676578], { icon: iconStop })
+            .bindTooltip(htmlPage("Houston")))
 
         cityMarkers.addLayer(L.marker([42.6511674, -73.754968], { icon: iconCity })
             .bindTooltip(htmlPage("Albany")))
@@ -183,6 +208,7 @@
         shelterMarkers.addLayer(WALog);
 
         map.addLayer(cityMarkers);
+        map.addLayer(stopMarkers);
 
         map.on('zoomend', function () {
             if (map.getZoom() < 12) {
