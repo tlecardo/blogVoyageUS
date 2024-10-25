@@ -424,6 +424,9 @@
             var cur_loc = await getCity(cur_pos)
 
             var next_travel = stations[cur_section.dest.code]
+
+            console.log(next_travel)
+
             let next_pos = [next_travel.lat, next_travel.lon]
             var next_loc = await getCity(next_pos)
 
